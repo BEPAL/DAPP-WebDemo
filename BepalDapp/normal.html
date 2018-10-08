@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Dapp</title>
+    <link href="style/style.css" rel="stylesheet" />
+    <script src="script/jquery-3.3.1.js"></script>
+    <script src="script/dapp.js"></script>
+    <script type="text/javascript">
+        function sdkload() {
+            $("#btn_hiddle").click(function () {
+                bepal.callAPP("navbar.toggleNavbar");
+            });
+            $("#btn_close").click(function () {
+                confirm("关闭", "确定关闭App吗", function (result) {
+                    if (result) {
+                        bepal.callAPP("navbar.closeDapp");
+                    } else {
+                        toast('取消关闭App');
+                    }
+                });
+            });
+
+            $("#btn_back").click(function () {
+                bepal.callAPP("navbar.goBack");
+            });
+
+            $("#btn_clipboard").click(function () {
+                bepal.callAPP("app.setClipboard", "设置复制的内容");
+            });
+
+            $("#btn_scan").click(function () {
+                scanQrCode(function (result) {
+                    toast('扫描结果=' + result);
+                });
+            });
+
+            $("#btn_language").click(function () {
+                bepal.callAPP("app.getCurrentLanguage", function (error, result) {
+                    if (error) {
+                        toast("code=" + error.code + ",message=" + error.message);
+                    } else {
+                        toast("语言=" + result);
+                    }
+                });
+            });
+
+            $("#btn_currency").click(function () {
+                bepal.callAPP("app.getCurrentCurrency", function (error, result) {
+                    if (error) {
+                        toast("code=" + error.code + ",message=" + error.message);
+                    } else {
+                        toast("货币单位=" + result);
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="dapp_content">
+        <div class="btn_list">
+            <input id="btn_hiddle" type="button" value="隐藏导航栏" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_close" type="button" value="关闭App" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_back" type="button" value="后退" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_clipboard" type="button" value="剪切板" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_scan" type="button" value="扫描" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_language" type="button" value="语言" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_currency" type="button" value="货币单位" />
+        </div>
+    </div>
+</body>
+</html>

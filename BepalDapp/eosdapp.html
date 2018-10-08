@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Dapp</title>
+    <link href="style/style.css" rel="stylesheet" />
+    <script src="script/jquery-3.3.1.js"></script>
+    <script src="script/dapp.js"></script>
+    <script type="text/javascript">
+        defaultCoin = "eos";
+        function firstLoad() {
+            $("#btn_scanaddress").click(function () {
+                scanQrCode(function (result) {
+                    $("#txt_address").val(result);
+                });
+            });
+            $("#btn_send").click(function () {
+                var params = {
+                    from: selectAccount,
+                    to: $("#txt_address").val(),
+                    value: $("#txt_amount").val()
+                };
+                bepal.callAPP("eos.bepalPay", params, function (error, result) {
+                    if (error) {
+                        toast("code=" + error.code + ",message=" + error.message);
+                    } else {
+                        toast(result);
+                    }
+                });
+            });
+        };
+    </script>
+</head>
+<body>
+    <div class="dapp_content">
+        <div class="send_list">
+            <span>接收地址：</span>
+            <input class="address" id="txt_address" type="text" />
+            <button class="btn" id="btn_scanaddress">扫描地址</button>
+        </div>
+
+        <div class="send_list">
+            <span>接收金额：</span>
+            <input class="address" id="txt_amount" type="number" placeholder="单位：EOS" />
+        </div>
+
+        <div class="send_list">
+            <button class="btn_confirm" id="btn_send">发送交易</button>
+        </div>
+    </div>
+</body>
+</html>

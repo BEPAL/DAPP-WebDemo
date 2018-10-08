@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Dapp</title>
+    <link href="style/style.css" rel="stylesheet" />
+    <script src="script/jquery-3.3.1.js"></script>
+    <script src="script/dapp.js"></script>
+    <script type="text/javascript">
+        defaultCoin = "eos";
+        function sdkload() {
+            $("#btn_account").click(function () {
+                bepal.callAPP("wallet.getCurrentAccount", defaultCoin, function (error, result) {
+                    if (error) {
+                        toast("code=" + error.code + ",message=" + error.message);
+                    } else {
+                        toast(JSON.stringify(result));
+                    }
+                });
+
+            });
+            $("#btn_accounts").click(function () {
+                bepal.callAPP("wallet.getAccountList", coin, function (error, result) {
+                    if (error) {
+                        toast("code=" + error.code + ",message=" + error.message);
+                    } else {
+                        toast(JSON.stringify(result));
+                    }
+                });
+            });
+            $("#btn_selectaccount").click(function () {
+                bepal.callAPP("wallet.showAccountSwitch",
+                    coin,
+                    function (error, result) {
+                        if (error) {
+                            toast("code=" + error.code + ",message=" + error.message);
+                        } else {
+                            toast(JSON.stringify(result));
+                        }
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="dapp_content">
+        <div class="btn_list">
+            <input id="btn_account" type="button" value="获取当前账户" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_accounts" type="button" value="获取账户列表" />
+        </div>
+
+        <div class="btn_list">
+            <input id="btn_selectaccount" type="button" value="选择账户" />
+        </div>
+    </div>
+</body>
+</html>
