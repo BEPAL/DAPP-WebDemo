@@ -5,7 +5,7 @@ if (navigator.userAgent.indexOf("bepalhotwallet") > 0) {
         document.addEventListener("onSdkReady",
             function () {
                 if (defaultCoin.length > 0) {
-                    bepal.callAPP("wallet.getCurrentAccount", coin, function (error, result) {
+                    bepal.callAPP("wallet.getCurrentAccount", defaultCoin, function (error, result) {
                         if (error) {
                             toast("code=" + error.code + ",message=" + error.message);
                         } else {
@@ -34,7 +34,7 @@ if (navigator.userAgent.indexOf("bepalhotwallet") > 0) {
 }
 
 function toast(msg) {
-    bepal.callAPP("app.toast", title);
+    bepal.callAPP("app.toast", msg);
 }
 
 function confirm(title, text, fun) {

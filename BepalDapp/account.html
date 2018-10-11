@@ -12,32 +12,37 @@
         function sdkload() {
             $("#btn_account").click(function () {
                 bepal.callAPP("wallet.getCurrentAccount", defaultCoin, function (error, result) {
-                    if (error) {
-                        toast("code=" + error.code + ",message=" + error.message);
-                    } else {
-                        toast(JSON.stringify(result));
-                    }
+					setTimeout(function(){
+					    if (error) {
+							toast("code=" + error.code + ",message=" + error.message);
+						} else {
+							toast(JSON.stringify(result));
+						}
+					},1000);
                 });
-
             });
             $("#btn_accounts").click(function () {
-                bepal.callAPP("wallet.getAccountList", coin, function (error, result) {
-                    if (error) {
-                        toast("code=" + error.code + ",message=" + error.message);
-                    } else {
-                        toast(JSON.stringify(result));
-                    }
+                bepal.callAPP("wallet.getAccountList", defaultCoin, function (error, result) {
+					setTimeout(function(){
+					    if (error) {
+							toast("code=" + error.code + ",message=" + error.message);
+						} else {
+							toast(JSON.stringify(result));
+						}
+					},1000);
                 });
             });
             $("#btn_selectaccount").click(function () {
                 bepal.callAPP("wallet.showAccountSwitch",
-                    coin,
+                    defaultCoin,
                     function (error, result) {
-                        if (error) {
-                            toast("code=" + error.code + ",message=" + error.message);
-                        } else {
-                            toast(JSON.stringify(result));
-                        }
+                       setTimeout(function(){
+							if (error) {
+								toast("code=" + error.code + ",message=" + error.message);
+							} else {
+								toast(JSON.stringify(result));
+							}
+						},1000);
                     });
             });
         }
